@@ -409,34 +409,28 @@
     }
   </script>
   <script>
-    // --- Produk Sync dari localStorage (Admin) ---
+    // --- Produk Sync dari Backend PHP ---
     function getProdukList() {
-      // Ambil dari localStorage jika ada, jika tidak fallback ke default
-      let produk = localStorage.getItem('produkList');
-      if (produk) {
-        try {
-          let arr = JSON.parse(produk);
-          if (Array.isArray(arr) && arr.length > 0) return arr;
-        } catch(e) {}
-      }
-      // Jika belum ada, set default satu kali saja
-      const defaultProduk = [
-        { nama: 'Dimsum mix isi 50 HALAL HARGA PABRIK', harga: 105000, stok: 20, rating: 4.9, gambar: 'images/products/isi 50.png' },
-        { nama: 'Dimsum mix isi 20 HALAL HARGA PABRIK', harga: 50000, stok: 15, rating: 4.9, gambar: 'images/products/isi 20.png' },
-        { nama: 'Dimsum mix isi 100 HALAL HARGA PABRIK', harga: 210000, stok: 10, rating: 4.9, gambar: 'images/banner.jpg' },
-        { nama: 'Dimsum mentai 6pcs', harga: 26000, stok: 12, rating: 4.9, gambar: 'images/products/mentai-6.jpg' },
-        { nama: 'Dimsum mentai 8pcs', harga: 32000, stok: 8, rating: 4.9, gambar: 'images/products/mentai-8.jpg' },
-        { nama: 'Sambosa Isi Daging Sapi Isi 9', harga: 40000, stok: 7, rating: 4.7, gambar: 'images/products/sambosa.jpg' },
-        { nama: 'Bento homemade kaki Naga isi 10', harga: 25000, stok: 9, rating: 5.0, gambar: 'images/products/bento-naga.jpg' },
-        { nama: 'Saos Dimsum', harga: 6000, stok: 30, rating: 4.9, gambar: 'images/banner.jpg' }
-      ];
-      localStorage.setItem('produkList', JSON.stringify(defaultProduk));
-      return defaultProduk;
+      // Ambil data produk dari backend PHP (produk.php) via fetch, return Promise
+      return fetch('produk.php')
+        .then(res => {
+          if (!res.ok) throw new Error('Gagal mengambil data produk dari server');
+          return res.json();
+        })
+        .then(data => {
+          if (Array.isArray(data)) return data;
+          if (data && Array.isArray(data.produk)) return data.produk;
+          return [];
+        })
+        .catch(err => {
+          console.error('Gagal fetch produk:', err);
+          return [];
+        });
     }
 
-    // Render produk di home
-    function renderProdukHome() {
-      const produkList = getProdukList();
+    // Render produk di home (async)
+    async function renderProdukHome() {
+      const produkList = await getProdukList();
       const produkRow = document.querySelector('.new-products .row');
       produkRow.innerHTML = '';
       produkList.forEach((p, i) => {
@@ -447,7 +441,7 @@
               <img src="${p.gambar}" alt="${p.nama}" class="card-img-top img-fluid rounded-top-4" style="object-fit:cover; height:220px;">
               <div class="card-body" style="background:rgba(233,251,229,0.8);">
                 <span class="font-weight-bold text-dark d-block mb-1" style="font-size:1.1rem;">${p.nama}</span>
-                <span class="text-danger d-block mb-2 font-weight-bold">Rp${p.harga.toLocaleString()}</span>
+                <span class="text-danger d-block mb-2 font-weight-bold">Rp${Number(p.harga).toLocaleString()}</span>
                 <span class="badge badge-info mb-2">Stok: ${p.stok}</span>
                 <div class="d-flex align-items-center small">
                   <span><i class="bi bi-star-fill text-warning"></i> ${p.rating}</span>
@@ -460,36 +454,11 @@
       });
     }
 
-    // Render sidebar produk
-    function renderSidebarProduk() {
-      const produkList = getProdukList();
-      const sidebar = document.querySelector('.sidebar-content ul.list-unstyled.mb-0');
-      if (!sidebar) return;
-      // Kategori dinamis (bisa diimprove sesuai kebutuhan)
-      let html = '<li class="mb-2"><b>Semua Produk</b><ul class="list-unstyled ml-3 mb-2">';
-      produkList.forEach((p, i) => {
-        html += `
-          <li>
-            <a href="produk.html?id=${i}" class="kategori-link d-flex align-items-center justify-content-between">
-              <img src="${p.gambar}" alt="${p.nama}" style="width:32px;height:32px;object-fit:cover;border-radius:8px;margin-right:8px;">
-              <span>${p.nama}</span>
-              <span class="ml-2 text-danger font-weight-bold">Rp${p.harga.toLocaleString()}</span>
-              <span class="ml-2 badge badge-info">Stok: ${p.stok}</span>
-              <span class="ml-2"><i class="bi bi-star-fill text-warning"></i> ${p.rating}</span>
-            </a>
-          </li>`;
-      });
-      html += '</ul></li>';
-      sidebar.innerHTML = html;
-    }
-
     // Jalankan render saat halaman load
     document.addEventListener('DOMContentLoaded', function() {
       renderProdukHome();
-      renderSidebarProduk();
     });
   </script>
   <script src="script/navbar-scroll.js"></script>
 </body>
 </html>
-``` 
