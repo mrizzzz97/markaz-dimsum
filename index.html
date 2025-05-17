@@ -319,7 +319,6 @@
         <div>
           <a href="https://instagram.com/markazdimsum" target="_blank" class="text-white mr-3"><i class="bi bi-instagram"></i></a>
           <a href="https://wa.me/6281770825467" target="_blank" class="text-white mr-3"><i class="bi bi-whatsapp"></i></a>
-          <a href="mailto:markazdimsum@gmail.com" class="text-white"><i class="bi bi-envelope"></i></a>
         </div>
       </div>
     </div>
@@ -407,32 +406,26 @@
         resultInfo.innerHTML = `<span class="text-success font-weight-bold">${found} produk ditemukan</span>`;
       }
     }
-  </script>
-  <script>
-    // --- Produk Sync dari Backend PHP ---
+
+    // Ambil produk dari localStorage (versi awal)
     function getProdukList() {
-      // Ambil data produk dari backend PHP (produk.php) via fetch, return Promise
-      return fetch('produk.php')
-        .then(res => {
-          if (!res.ok) throw new Error('Gagal mengambil data produk dari server');
-          return res.json();
-        })
-        .then(data => {
-          if (Array.isArray(data)) return data;
-          if (data && Array.isArray(data.produk)) return data.produk;
-          return [];
-        })
-        .catch(err => {
-          console.error('Gagal fetch produk:', err);
-          return [];
-        });
+      let produk = localStorage.getItem('produkList');
+      if (!produk) return [];
+      try {
+        return JSON.parse(produk);
+      } catch (e) {
+        return [];
+      }
     }
 
-    // Render produk di home (async)
-    async function renderProdukHome() {
-      const produkList = await getProdukList();
+    function renderProdukHome() {
+      const produkList = getProdukList();
       const produkRow = document.querySelector('.new-products .row');
       produkRow.innerHTML = '';
+      if (!produkList || produkList.length === 0) {
+        produkRow.innerHTML = '<div class="col-12 text-center text-danger font-weight-bold">Produk tidak tersedia.</div>';
+        return;
+      }
       produkList.forEach((p, i) => {
         produkRow.innerHTML += `
         <div class="col-12 col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="${100 + i * 100}">
@@ -454,7 +447,6 @@
       });
     }
 
-    // Jalankan render saat halaman load
     document.addEventListener('DOMContentLoaded', function() {
       renderProdukHome();
     });
