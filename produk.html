@@ -18,122 +18,116 @@
         <img src="images/logo.png" alt="Logo Markaz Dimsum" height="36" class="mr-2"/>
         <span class="font-weight-bold" style="font-size:1.6rem; color:#1dbf73; letter-spacing:1px;">Markaz Dimsum</span>
       </a>
-      <button class="navbar-toggler ml-auto d-block" id="sidebarToggle" type="button" aria-label="Toggle navigation" style="position:absolute;right:18px;top:18px;z-index:1101;background:none;border-radius:0;box-shadow:none;transition:background 0.2s;">
-        <span class="navbar-toggler-icon" id="sidebarIcon" style="filter:drop-shadow(0 2px 8px #1dbf7350);transition:all 0.3s;"></span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-end sidebar-modern" id="mainMenu">
-        <div class="sidebar-content p-4 rounded-right shadow-lg animate__animated animate__fadeInRight animate__faster" style="min-height:100vh;max-width:360px;width:92vw;background:linear-gradient(135deg,#e9fbe5 0%,#fffbe0 100%);backdrop-filter:blur(18px);box-shadow:0 8px 32px #1dbf7340;position:fixed;top:0;right:0;z-index:1050;overflow-y:auto;transition:all 0.35s cubic-bezier(.77,0,.18,1);">
-          <button class="close btn btn-light rounded-circle position-absolute animate__animated animate__fadeIn animate__faster" id="sidebarCloseBtn" style="top:18px;right:18px;width:38px;height:38px;z-index:1100;display:none;"></button>
-          <div class="text-center mb-4 animate__animated animate__zoomIn animate__faster">
-            <img src="images/logo.png" alt="Logo Markaz Dimsum" height="56" class="mb-2" style="filter:drop-shadow(0 2px 12px #1dbf7340);"/>
-            <div class="font-weight-bold" style="font-size:1.4rem;color:#1dbf73;text-shadow:0 2px 8px #fff7;">Markaz Dimsum</div>
-          </div>
-          <ul class="navbar-nav text-right mb-4 animate__animated animate__fadeInUp animate__faster">
-            <li class="nav-item"><a href="index.html" class="nav-link">Beranda</a></li>
-            <li class="nav-item"><a href="tentang.html" class="nav-link">Tentang</a></li>
-            <li class="nav-item"><a href="#kontak" class="nav-link">Kontak</a></li>
-            <li class="nav-item"><a href="login.html" class="nav-link font-weight-bold text-success"><i class="bi bi-person-circle mr-1"></i>Admin Login</a></li>
-          </ul>
-          <hr class="animate__animated animate__fadeIn animate__faster">
-          <!-- Tidak ada produk/kategori di sidebar, sesuai home -->
-        </div>
+      <div class="collapse navbar-collapse justify-content-end" id="mainMenu">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a href="index.html" class="nav-link">Beranda</a></li>
+          <li class="nav-item"><a href="tentang.html" class="nav-link">Tentang</a></li>
+          <li class="nav-item"><a href="kontak.html" class="nav-link">Kontak</a></li>
+          <li class="nav-item d-lg-none mt-2 mb-2"><button class="theme-toggle" id="themeToggleBtnMobile" aria-label="Toggle dark mode">
+            <i class="bi bi-sun-fill sun"></i>
+            <i class="bi bi-moon-fill moon"></i>
+          </button></li>
+        </ul>
+        <button class="theme-toggle ml-3 d-none d-lg-flex" id="themeToggleBtn" aria-label="Toggle dark mode">
+          <i class="bi bi-sun-fill sun"></i>
+          <i class="bi bi-moon-fill moon"></i>
+        </button>
       </div>
     </div>
   </nav>
   <style>
-    .sidebar-modern {
-      transition: all 0.35s cubic-bezier(.77,0,.18,1);
+    /* Hapus style .navbar-nav .nav-link yang lama agar tidak menimpa main.css */
+    .theme-toggle {
+      background: #fff;
+      border: 1.5px solid #1dbf73;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, border 0.2s;
+      font-size: 1.7rem;
+      color: #1dbf73;
     }
-    .sidebar-modern:not(.show) .sidebar-content {
-      transform: translateX(100%);
-      opacity: 0;
-      pointer-events: none;
-    }
-    .sidebar-modern.show .sidebar-content {
-      transform: translateX(0);
+    .theme-toggle .sun {
       opacity: 1;
-      pointer-events: auto;
-      box-shadow: 0 8px 32px #1dbf7340;
-      animation: sidebarPop 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+      transform: rotate(0deg) scale(1);
+      transition: opacity 0.4s, transform 0.4s;
     }
-    @keyframes sidebarPop {
-      0% { opacity: 0; transform: translateX(60%) scale(0.95); }
-      80% { opacity: 1; transform: translateX(-2%) scale(1.03); }
-      100% { opacity: 1; transform: translateX(0) scale(1); }
+    .theme-toggle .moon {
+      opacity: 0;
+      transform: rotate(-90deg) scale(0.7);
+      transition: opacity 0.4s, transform 0.4s;
     }
-    .sidebar-modern .close {
-      display: none;
+    body.dark-mode {
+      background: #181c1f !important;
+      color: #f3f3f3 !important;
     }
-    .sidebar-open .sidebar-modern .close {
-      display: block;
+    body.dark-mode .glass-navbar, body.dark-mode .navbar, body.dark-mode .navbar-nav .nav-link {
+      background: #23272b !important;
+      color: #f3f3f3 !important;
     }
-    .sidebar-modern ul li {
-      transition: background 0.2s, color 0.2s;
-      border-radius: 8px;
-      padding: 2px 0 2px 0;
+    body.dark-mode .navbar-nav .nav-link {
+      color: #f3f3f3 !important;
     }
-    .sidebar-modern ul li:hover, .sidebar-modern .kategori-link:hover {
-      background: linear-gradient(90deg,#fffbe0 0%,#e9fbe5 100%);
-      color: #1dbf73;
-      text-shadow:0 2px 8px #fff7;
+    body.dark-mode .navbar-nav .nav-link:hover, body.dark-mode .navbar-nav .nav-link.active {
+      color: #1dbf73 !important;
     }
-    .sidebar-modern .kategori-link {
-      color: #222;
-      font-weight: 500;
-      text-decoration: none;
-      transition: color 0.2s, background 0.2s, box-shadow 0.2s;
-      border-radius: 6px;
-      padding: 2px 6px;
-      display: inline-block;
+    body.dark-mode .theme-toggle {
+      background: #23272b !important;
+      border-color: #1dbf73 !important;
     }
-    .sidebar-modern .kategori-link:active {
-      background: #1dbf7315;
-      color: #1dbf73;
+    body.dark-mode .theme-toggle .sun {
+      opacity: 0;
+      transform: rotate(90deg) scale(0.7);
     }
-    .sidebar-modern .sidebar-content {
-      box-shadow: 0 8px 32px #1dbf7340;
-      border-top-left-radius: 2rem;
-      border-bottom-left-radius: 2rem;
-      border-right: 3px solid #1dbf73;
-      animation: sidebarPop 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+    body.dark-mode .theme-toggle .moon {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+      color: #ffe066;
     }
-    /* Hamburger to X animation */
-    .navbar-toggler-icon {
-      width: 28px;
-      height: 28px;
-      display: inline-block;
-      position: relative;
-      transition: all 0.3s cubic-bezier(.77,0,.18,1);
+    .theme-toggle:hover {
+      background: #e9fbe5;
+      border-color: #169e5e;
     }
-    .navbar-toggler-icon, .navbar-toggler-icon:before, .navbar-toggler-icon:after {
-      background: #1dbf73;
-      border-radius: 2px;
-      height: 4px;
-      width: 100%;
-      position: absolute;
-      left: 0;
-      content: '';
-      transition: all 0.3s cubic-bezier(.77,0,.18,1);
-      display: block;
+    body.dark-mode .card.glass-card, body.dark-mode .card-body {
+      background: #23272b !important;
+      color: #f3f3f3 !important;
+      box-shadow: 0 2px 12px #0008;
     }
-    .navbar-toggler-icon:before {
-      top: -9px;
+    body.dark-mode .card .text-dark, body.dark-mode .card .font-weight-bold {
+      color: #fff !important;
     }
-    .navbar-toggler-icon:after {
-      top: 9px;
+    body.dark-mode .text-danger {
+      color: #1dbf73 !important;
     }
-    .sidebar-open .navbar-toggler-icon {
-      background: transparent;
+    body.dark-mode .footer-markaz {
+      background: #181c1f !important;
+      color: #f3f3f3 !important;
     }
-    .sidebar-open .navbar-toggler-icon:before {
-      transform: rotate(45deg);
-      top: 0;
-      background: #e74c3c;
+    body.dark-mode .footer-markaz a.text-white {
+      color: #f3f3f3 !important;
     }
-    .sidebar-open .navbar-toggler-icon:after {
-      transform: rotate(-45deg);
-      top: 0;
-      background: #e74c3c;
+    body.dark-mode .footer-markaz a.text-white:hover {
+      color: #1dbf73 !important;
+    }
+    body.dark-mode .modal-content {
+      background: #23272b !important;
+      color: #f3f3f3 !important;
+    }
+    body.dark-mode .btn-success, body.dark-mode .btn-success:focus, body.dark-mode .btn-success:active {
+      background: #1dbf73 !important;
+      border-color: #1dbf73 !important;
+      color: #fff !important;
+    }
+    body.dark-mode .btn-success:hover {
+      background: #169e5e !important;
+      border-color: #169e5e !important;
     }
   </style>
   <section class="container" style="margin-top:120px;max-width:800px;">
@@ -142,12 +136,11 @@
         <img id="produk-gambar" src="images/banner.jpg" alt="Produk" class="img-fluid rounded-4 shadow-sm w-100" style="object-fit:cover;max-height:320px;">
       </div>
       <div class="col-md-7">
-        <h2 id="produk-nama" class="font-weight-bold mb-2" style="color:#1dbf73;">Nama Produk</h2>
+        <h2 id="produk-nama" class="font-weight-bold mb-2 judul-underline" style="color:#1dbf73;">Nama Produk</h2>
         <div class="mb-2">
           <span id="produk-harga" class="h4 text-danger font-weight-bold">Rp0</span>
           <span id="produk-rating" class="ml-3"><i class="bi bi-star-fill text-warning"></i> 5.0</span>
         </div>
-        <div class="mb-3 text-muted" id="produk-stok">Stok: 0</div>
         <p id="produk-deskripsi">Deskripsi produk akan tampil di sini. Produk Markaz Dimsum dijamin halal, higienis, dan lezat!</p>
         <a href="https://www.tokopedia.com/mannawsalwa" target="_blank" class="btn btn-success btn-lg font-weight-bold px-4 py-2 mb-2" id="beliBtn"><i class="bi bi-cart-plus mr-2"></i>Beli Sekarang di Tokopedia</a>
       </div>
@@ -199,39 +192,7 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>AOS.init();</script>
   <script>
-    // --- Produk Sync dari localStorage (Admin) ---
-    function getProdukList() {
-      return JSON.parse(localStorage.getItem('produkList')) || [
-        { nama: 'Dimsum mix isi 50 HALAL HARGA PABRIK', harga: 105000, stok: 20, rating: 4.9, gambar: 'images/products/isi 50.png', deskripsi: 'Dimsum frozen isi 50, halal, harga pabrik.' },
-        { nama: 'Dimsum mix isi 20 HALAL HARGA PABRIK', harga: 50000, stok: 15, rating: 4.9, gambar: 'images/products/isi 20.png', deskripsi: 'Dimsum frozen isi 20, halal, harga pabrik.' },
-        { nama: 'Dimsum mix isi 100 HALAL HARGA PABRIK', harga: 210000, stok: 10, rating: 4.9, gambar: 'images/banner.jpg', deskripsi: 'Dimsum frozen isi 100, halal, harga pabrik.' },
-        { nama: 'Dimsum mentai 6pcs', harga: 26000, stok: 12, rating: 4.9, gambar: 'images/products/mentai-6.jpg', deskripsi: 'Dimsum mentai matang isi 6.' },
-        { nama: 'Dimsum mentai 8pcs', harga: 32000, stok: 8, rating: 4.9, gambar: 'images/products/mentai-8.jpg', deskripsi: 'Dimsum mentai matang isi 8.' },
-        { nama: 'Sambosa Isi Daging Sapi Isi 9', harga: 40000, stok: 7, rating: 4.7, gambar: 'images/products/sambosa.jpg', deskripsi: 'Sambosa isi daging sapi, isi 9.' },
-        { nama: 'Bento homemade kaki Naga isi 10', harga: 25000, stok: 9, rating: 5.0, gambar: 'images/products/bento-naga.jpg', deskripsi: 'Bento homemade kaki naga isi 10.' },
-        { nama: 'Saos Dimsum', harga: 6000, stok: 30, rating: 4.9, gambar: 'images/banner.jpg', deskripsi: 'Saos dimsum homemade.' }
-      ];
-    }
-    // Render produk detail
-    function renderProdukDetail() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get('id');
-      const produkList = getProdukList();
-      let idx = parseInt(id);
-      if (isNaN(idx) || !produkList[idx]) idx = 0;
-      const p = produkList[idx];
-      document.getElementById('produk-nama').textContent = p.nama;
-      document.getElementById('produk-harga').textContent = 'Rp' + p.harga.toLocaleString();
-      document.getElementById('produk-stok').textContent = 'Stok: ' + p.stok;
-      document.getElementById('produk-rating').innerHTML = `<i class='bi bi-star-fill text-warning'></i> ${p.rating}`;
-      document.getElementById('produk-gambar').src = p.gambar;
-      document.getElementById('produk-gambar').alt = p.nama;
-      document.getElementById('produk-deskripsi').textContent = p.deskripsi || '';
-      document.getElementById('beliBtn').href = 'https://www.tokopedia.com/mannawsalwa';
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-      renderProdukDetail();
-    });
+    // Hapus seluruh fitur admin, stok, dan JS produk
   </script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -292,6 +253,14 @@
         document.querySelector('.theme-toggle .moon').style.opacity = isDark ? 1 : 0;
     }
     document.addEventListener('DOMContentLoaded', function() {
+      const themeBtn = document.getElementById('themeToggleBtn');
+      if (themeBtn) {
+        themeBtn.addEventListener('click', function() {
+          const isDark = !document.body.classList.contains('dark-mode');
+          setTheme(isDark);
+          updateThemeIcon();
+        });
+      }
       // Set initial theme
       const saved = localStorage.getItem('theme');
       setTheme(saved === 'dark');
@@ -299,6 +268,192 @@
     });
   </script>
   <script src="script/navbar-scroll.js"></script>
+  <script>
+    // Data produk
+    const produkList = {
+      isi50: {
+        nama: 'Dimsum mix isi 50',
+        harga: 'Rp105.000',
+        rating: '4.9',
+        deskripsi: `<b>Kondisi:</b> Baru<br>
+<b>Min. Pemesanan:</b> 50 Buah<br>
+<b>Etalase:</b> Dimsum<br>
+<b>Markaz Dimsum #Original series#</b> topping: jamur, wortel, smokebeef, udang, crabstick. include saos merah<br>
+<b>#Blackpepper series#</b> Dimsum Ayam, dengan variant topping: wortel, jamur, udang, smokebeef, keju, kepiting. Sdh include saos racikan sendiri.<br><br>
+Tips menghangatkan dimsum:<br>
+Masukkan dimsum yg tdk beku ke dalam panci yang sdh panas sekitar 5 mnt sampai terlihat dimsum mengembang. Tidak perlu terlalu lama mengukus, krn akan menjadi overcooked yang menyebabkan berkurangnya kualitas dimsum.<br>
+Ciri2 dimsum dengan tepung sedikit adalah lembut, tidak perlu waktu lama untuk menghangatkannya.<br><br>
+<b>Markaz Dimsum by Manna w Salwa</b> mempunyai komposisi daging dan tepung <b>TERBAIK</b>. Lembut karena dominan daging. Rasa <b>TERJAMIN</b>, kualitas bahan baku <b>FRESH</b> dan <b>TERJAGA</b>.<br><br>
+Sudah terbukti kelezatan nya dari ratusan testimoni para customer.<br><br>
+Yuuu segera di order dan nikmati kelezatannya bersama keluarga, teman dan saudara.<br><br>
+<b>Note:</b> Isi 50 dan order kelipatan 50<br>
+Mixed topping`,
+        gambar: 'images/products/isi 50.png',
+        link: 'https://www.tokopedia.com/mannawsalwa',
+        link_wa: 'https://wa.me/6281770825467',
+        link_shopee: 'https://shopee.co.id/markazdimsum'
+      },
+      isi20: {
+        nama: 'Dimsum mix isi 20',
+        harga: 'Rp50.000',
+        rating: '4.9',
+        deskripsi: 'Dimsum mix isi 20, pas untuk camilan atau oleh-oleh. Halal dan enak!',
+        gambar: 'images/products/isi 20.jpg',
+        link: 'https://www.tokopedia.com/mannawsalwa',
+        link_wa: 'https://wa.me/6281770825467',
+        link_shopee: 'https://shopee.co.id/markazdimsum'
+      },
+      isi100: {
+        nama: 'Dimsum mix isi 100',
+        harga: 'Rp210.000',
+        rating: '4.9',
+        deskripsi: `<b>Kondisi:</b> Baru<br>
+<b>Min. Pemesanan:</b> 100 Buah<br>
+<b>Etalase:</b> Dimsum<br>
+<b>Markaz Dimsum</b><br><br>
+Topping wortel, jamur, smokebeef, tuna, crabstick dan udang<br>
+Saos pasta merah <br><br>
+Diproses dengan bahan baku terbaik, higienis, aman untuk anak2. <b>Berkomitmen Tidak menggunakan bahan pengawet, pemutih dan bahan berbahaya lainnya.</b><br><br>
+Kami insyaAllah menyajikan kualitas dan manfaat terbaik.<br><br>
+Sudah terbukti kelezatan nya dari ratusan testimoni para customer.<br><br>
+Yuuu segera di order dimsum Manna wa Salwa ini dan nikmati kelezatannya bersama keluarga, teman dan saudara.<br><br>
+<b>Note:</b><br>
+Isi 100 dan order kelipatan 100<br>
+Mixed topping,<br>
+Berat 100pcs sekitar 3.5kg<br><br>
+<b>Update harga Maret 2024</b><br>
+harga 100-200pcs: <b>208rb</b><br>
+harga 200-500pcs: <b>199rb</b><br>
+Pembelian byk silahkan hubungi admin`,
+        gambar: 'images/products/isi 100.png',
+        link: 'https://www.tokopedia.com/mannawsalwa',
+        link_wa: 'https://wa.me/6281770825467',
+        link_shopee: 'https://shopee.co.id/markazdimsum'
+      },
+      mentai: {
+        nama: 'Dimsum mentai',
+        harga: 'Rp26.000',
+        rating: '4.9',
+        deskripsi: `<b>Si Melted Mentai</b><br><br>
+*MASIH* Harga NgAdi~nGaDi...<br>
+<b>Dimsum Mentai</b><br>
+Saos mentai asli pakai tobiko/mentaiko (telur ikan pollock) membuat mentai menjadi gurih.<br><br>
+Open PROMO!!<br>
+<del>45K</del> <del>40K</del><br><br>
+Bener2 ngadi2 harganya!!<br>
+8pcs : 32k<br>
+6pcs: 26k<br><br>
+Ketentuan order:<br>
+Pengiriman jam 11 (batas order jam 9)<br>
+Pengiriman jam 16.30 (batas order jam 14)<br><br>
+<b>MarkazDimsum</b><br>
+0817-7082-5467`,
+        gambar: 'images/products/mentai.png',
+        link: 'https://wa.me/6281770825467' // hanya WA untuk mentai
+      },
+      sambosa: {
+        nama: 'Sambosa Isi Daging Sapi Isi 9',
+        harga: 'Rp40.000',
+        rating: '4.7',
+        deskripsi: 'Sambosa isi daging sapi, gurih dan renyah. Isi 9 pcs.',
+        gambar: 'images/products/sambosa.jpg',
+        link: 'https://www.tokopedia.com/mannawsalwa',
+        link_wa: 'https://wa.me/6281770825467',
+        link_shopee: 'https://shopee.co.id/markazdimsum'
+      },
+      bento: {
+        nama: 'Bento homemade kaki Naga isi 10',
+        harga: 'Rp25.000',
+        rating: '5.0',
+        deskripsi: 'Bento homemade kaki naga isi 10, cocok untuk bekal anak.',
+        gambar: 'images/products/bento.jpg',
+        link: 'https://www.tokopedia.com/mannawsalwa',
+        link_wa: 'https://wa.me/6281770825467',
+        link_shopee: 'https://shopee.co.id/markazdimsum'
+      },
+      saos: {
+        nama: 'Saos Dimsum',
+        harga: 'Rp6.000',
+        rating: '4.9',
+        deskripsi: `<b>Kondisi:</b> Baru<br>
+<b>Min. Pemesanan:</b> 1 Buah<br>
+<b>Etalase:</b> Dimsum<br>
+Saos merah sudah di racik pakai tambahan minyak wijen`,
+        gambar: 'images/products/saos.jpg',
+        link: 'https://www.tokopedia.com/mannawsalwa',
+        link_wa: 'https://wa.me/6281770825467',
+        link_shopee: 'https://shopee.co.id/markazdimsum'
+      },
+      tartar: {
+        nama: 'Dimsum isi 3 (Tartar)',
+        harga: 'Rp12.000',
+        rating: '4.8',
+        deskripsi: 'Dimsum isi 3 varian tartar, cocok untuk snack atau tester.',
+        gambar: 'images/products/tartar.png',
+        link: 'https://www.tokopedia.com/mannawsalwa',
+        link_wa: 'https://wa.me/6281770825467',
+        link_shopee: 'https://shopee.co.id/markazdimsum'
+      }
+    };
+
+    // Ambil id dari URL
+    function getProdukId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('id');
+    }
+
+    // Update tombol beli di halaman produk detail
+    function tampilkanProduk() {
+      const id = getProdukId();
+      const data = produkList[id];
+      if (!data) return;
+      document.getElementById('produk-nama').textContent = data.nama;
+      document.getElementById('produk-harga').textContent = data.harga;
+      document.getElementById('produk-rating').innerHTML = `<i class='bi bi-star-fill text-warning'></i> ${data.rating}`;
+      document.getElementById('produk-deskripsi').innerHTML = data.deskripsi;
+      document.getElementById('produk-gambar').src = data.gambar;
+      document.getElementById('produk-gambar').alt = data.nama;
+      // Tampilkan tombol beli sesuai produk
+      const beliBtn = document.getElementById('beliBtn');
+      let btns = '';
+      if (id === 'mentai') {
+        btns = `<a href='${data.link}' target='_blank' class='btn btn-success btn-lg font-weight-bold px-4 py-2 mb-2'><i class='bi bi-whatsapp mr-2'></i>Pesan via WhatsApp</a>`;
+      } else if (data.link && data.link_wa && data.link_shopee) {
+        btns = `<a href='${data.link}' target='_blank' class='btn btn-success btn-lg font-weight-bold px-4 py-2 mb-2 mr-2'><i class='bi bi-cart-plus mr-2'></i>Tokopedia</a>`;
+        btns += `<a href='${data.link_wa}' target='_blank' class='btn btn-success btn-lg font-weight-bold px-4 py-2 mb-2 mr-2'><i class='bi bi-whatsapp mr-2'></i>WhatsApp</a>`;
+        btns += `<a href='${data.link_shopee}' target='_blank' class='btn btn-success btn-lg font-weight-bold px-4 py-2 mb-2'><i class='bi bi-bag mr-2'></i>Shopee</a>`;
+      }
+      beliBtn.outerHTML = `<div id='beliBtnWrap' class='d-flex flex-wrap'>${btns}</div>`;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      tampilkanProduk();
+      // ...existing code...
+    });
+  </script>
+  <script>
+    // Navbar dark mode toggle (desktop & mobile)
+    function setThemeIcon(isDark) {
+      document.querySelectorAll('.theme-toggle').forEach(btn => {
+        btn.querySelector('.sun').style.opacity = isDark ? 0 : 1;
+        btn.querySelector('.moon').style.opacity = isDark ? 1 : 0;
+      });
+    }
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+      setThemeIcon(document.body.classList.contains('dark-mode'));
+    }
+    document.getElementById('themeToggleBtn').onclick = toggleDarkMode;
+    var themeToggleBtnMobile = document.getElementById('themeToggleBtnMobile');
+    if(themeToggleBtnMobile) themeToggleBtnMobile.onclick = toggleDarkMode;
+    // On load
+    if(localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+      setThemeIcon(true);
+    } else {
+      setThemeIcon(false);
+    }
+  </script>
 </body>
 </html>
-``` 

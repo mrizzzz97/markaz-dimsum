@@ -9866,4 +9866,222 @@ body.dark-mode .theme-toggle .moon {
   color: #ffe066;
 }
 
+/* Styling khusus tombol Tokopedia agar hanya hijau solid, tanpa gradasi, tanpa efek warna lain */
+#beliBtn, .btn-tokopedia {
+  background: #1dbf73 !important;
+  border: none !important;
+  color: #fff !important;
+  box-shadow: 0 2px 8px #1dbf7340;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: background 0.2s, color 0.2s;
+}
+#beliBtn:hover, .btn-tokopedia:hover {
+  background: #169e5e !important;
+  color: #fff !important;
+}
+
+/* Font global untuk semua halaman */
+body, html, .container, .navbar, .footer-markaz, .card, .modal-content, .new-products, .store-carousel, .glass-card, .navbar-nav .nav-link, .form-control, .btn, .card-body, .card-title, .card-text, h1, h2, h3, h4, h5, h6, p, span, div, a, li, ul, ol, label, input, textarea, select {
+  font-family: 'Poppins', 'Segoe UI', Arial, Helvetica, sans-serif !important;
+}
+
+/* Garis bawah animasi untuk judul/tulisan utama */
+.judul-underline {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 6px;
+  font-weight: bold;
+}
+.judul-underline::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 4px;
+  background: #1dbf73;
+  border-radius: 2px;
+  transition: all 0.35s cubic-bezier(.77,0,.18,1);
+  transform: translateX(-50%);
+}
+.judul-underline:hover::after, .judul-underline.active::after, .judul-underline:focus::after {
+  width: 80%;
+}
+
+/* Dark mode: pastikan semua teks hitam jadi putih */
+body.dark-mode, body.dark-mode *, body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode h5, body.dark-mode h6, body.dark-mode p, body.dark-mode span, body.dark-mode div, body.dark-mode a, body.dark-mode li, body.dark-mode label, body.dark-mode input, body.dark-mode textarea, body.dark-mode select {
+  color: #fff !important;
+  border-color: #444 !important;
+}
+body.dark-mode .text-dark, body.dark-mode .card .text-dark, body.dark-mode .font-weight-bold {
+  color: #fff !important;
+}
+body.dark-mode .form-control {
+  background: #23272b !important;
+  color: #fff !important;
+  border-color: #444 !important;
+}
+body.dark-mode .footer-markaz {
+  background: #181c1f !important;
+  color: #fff !important;
+}
+body.dark-mode .footer-markaz a.text-white {
+  color: #fff !important;
+}
+body.dark-mode .footer-markaz a.text-white:hover {
+  color: #1dbf73 !important;
+}
+
+/* Navbar & Layout Responsiveness */
+@media (max-width: 991.98px) {
+  .navbar .navbar-collapse {
+    background: #fff !important;
+    border-radius: 0 0 1.5rem 1.5rem;
+    box-shadow: 0 4px 24px #0001;
+    margin-top: 0.5rem;
+    padding: 1rem 0.5rem;
+  }
+  body.dark-mode .navbar .navbar-collapse {
+    background: #23272b !important;
+  }
+  .navbar-nav .nav-link {
+    padding: 0.75rem 1.2rem;
+    font-size: 1.15rem;
+    text-align: center;
+  }
+  .theme-toggle {
+    margin: 0 auto !important;
+    display: flex !important;
+  }
+}
+@media (max-width: 767.98px) {
+  .footer-markaz .container {
+    flex-direction: column !important;
+    text-align: center;
+  }
+  .footer-markaz .row > div {
+    margin-bottom: 2rem;
+  }
+  .new-products .card-img-top {
+    height: 160px !important;
+  }
+  .carousel-inner .carousel-item img {
+    height: 260px !important;
+  }
+}
+@media (max-width: 575.98px) {
+  .navbar-brand span {
+    font-size: 1.1rem !important;
+  }
+  .carousel-inner .carousel-item img {
+    height: 160px !important;
+  }
+  .new-products .card-img-top {
+    height: 110px !important;
+  }
+  .footer-markaz .container {
+    padding: 1rem 0.5rem !important;
+  }
+}
+
+/* Hapus underline animasi pada judul utama dan nav-link */
+.judul-underline {
+  border-bottom: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+.navbar-nav .nav-link {
+  position: relative;
+  transition: color 0.2s;
+}
+.navbar-nav .nav-link:after {
+  display: none !important;
+}
+
+/* Pastikan semua font tetap modern dan konsisten */
+body, .navbar, .footer-markaz, .card, .modal-content, .btn, .nav-link {
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif !important;
+}
+
+/* RESPONSIVE LAYOUT FIX FOR ALL PAGES */
+@media (max-width: 991.98px) {
+  .navbar .navbar-collapse {
+    background: #fff !important;
+    border-radius: 0 0 1.5rem 1.5rem;
+    box-shadow: 0 4px 24px #0001;
+    margin-top: 0.5rem;
+    padding: 1rem 0.5rem;
+  }
+  body.dark-mode .navbar .navbar-collapse {
+    background: #23272b !important;
+  }
+  .navbar-nav .nav-link {
+    padding: 0.75rem 1.2rem;
+    font-size: 1.15rem;
+    text-align: center;
+  }
+  .theme-toggle {
+    margin: 0 auto !important;
+    display: flex !important;
+  }
+  .container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 98vw !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+@media (max-width: 767.98px) {
+  .footer-markaz .container {
+    flex-direction: column !important;
+    text-align: center;
+  }
+  .footer-markaz .row > div {
+    margin-bottom: 2rem;
+  }
+  .new-products .card-img-top, .produk-img, .about-img {
+    height: 160px !important;
+    object-fit: cover !important;
+    width: 100% !important;
+  }
+  .carousel-inner .carousel-item img {
+    height: 220px !important;
+    object-fit: cover !important;
+  }
+  .about-section, .tentang-section, .kontak-section {
+    padding: 1.5rem 0.5rem !important;
+  }
+  .about-section .row, .tentang-section .row, .kontak-section .row {
+    flex-direction: column !important;
+    gap: 1.5rem;
+  }
+  .about-section .col-md-6, .tentang-section .col-md-6, .kontak-section .col-md-6 {
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+  }
+}
+@media (max-width: 575.98px) {
+  .navbar-brand span {
+    font-size: 1.1rem !important;
+  }
+  .carousel-inner .carousel-item img {
+    height: 120px !important;
+  }
+  .new-products .card-img-top, .produk-img, .about-img {
+    height: 90px !important;
+  }
+  .footer-markaz .container {
+    padding: 1rem 0.5rem !important;
+  }
+  h3, .judul-underline {
+    font-size: 1.2rem !important;
+  }
+}
+
+/* Pastikan semua font tetap modern dan konsisten */
+body, .navbar, .footer-markaz, .card, .modal-content, .btn, .nav-link {
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif !important;
+}
+
 /*# sourceMappingURL=main.css.map */
