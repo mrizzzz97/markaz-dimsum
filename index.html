@@ -54,30 +54,6 @@
       </div>
     </div>
   </nav>
-  <script>
-  // Navbar dark mode toggle (desktop & mobile)
-  function setThemeIcon(isDark) {
-    document.querySelectorAll('.theme-toggle').forEach(btn => {
-      btn.querySelector('.sun').style.opacity = isDark ? 0 : 1;
-      btn.querySelector('.moon').style.opacity = isDark ? 1 : 0;
-    });
-  }
-  function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-    setThemeIcon(document.body.classList.contains('dark-mode'));
-  }
-  document.getElementById('themeToggleBtn').onclick = toggleDarkMode;
-  var themeToggleBtnMobile = document.getElementById('themeToggleBtnMobile');
-  if(themeToggleBtnMobile) themeToggleBtnMobile.onclick = toggleDarkMode;
-  // On load
-  if(localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark-mode');
-    setThemeIcon(true);
-  } else {
-    setThemeIcon(false);
-  }
-  </script>
   <!-- End Navigation -->
 
   <!-- Carousel -->
@@ -194,7 +170,7 @@
           <img src="images/logo.png" alt="Logo Markaz Dimsum" style="height:48px;filter:drop-shadow(0 2px 8px #1dbf7340);margin-bottom:10px;">
           <div class="mb-2">WA: <a href="https://wa.me/6281770825467" class="text-white">+62-817-7082-5467</a></div>
           <div class="mb-2">Instagram: <a href="https://instagram.com/markazdimsum" class="text-white">@markazdimsum</a></div>
-          <div class="mb-2 alamat-toko">Alamat: Spring fiesta, Ak 9 No 20, Lambangsari, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510</div>
+          <div class="mb-2 alamat-toko">Alamat: Grand Wisata, Tambun Selatan</div>
         </div>
         <div class="col-md-4 mb-4 mb-md-0">
           <h4 class="font-weight-bold mb-3" style="color:#1dbf73;">KATEGORI</h4>
@@ -412,37 +388,45 @@
     }
   </style>
   <script>
-    // Perbaiki toggle dark mode agar konsisten di semua halaman
-    function setTheme(dark) {
-      if (dark) {
-        document.body.classList.add('dark-mode');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.body.classList.remove('dark-mode');
-        localStorage.setItem('theme', 'light');
-      }
+  // DARK MODE/LIGHT MODE TOGGLE FIX
+  function setTheme(dark) {
+    if (dark) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
     }
-    function updateThemeIcon() {
-      const isDark = document.body.classList.contains('dark-mode');
-      if (document.querySelector('.theme-toggle .sun'))
-        document.querySelector('.theme-toggle .sun').style.opacity = isDark ? 0 : 1;
-      if (document.querySelector('.theme-toggle .moon'))
-        document.querySelector('.theme-toggle .moon').style.opacity = isDark ? 1 : 0;
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-      const themeBtn = document.getElementById('themeToggleBtn');
-      if (themeBtn) {
-        themeBtn.addEventListener('click', function() {
-          const isDark = !document.body.classList.contains('dark-mode');
-          setTheme(isDark);
-          updateThemeIcon();
-        });
-      }
-      // Set initial theme
-      const saved = localStorage.getItem('theme');
-      setTheme(saved === 'dark');
-      updateThemeIcon();
+  }
+  function updateThemeIcon() {
+    const isDark = document.body.classList.contains('dark-mode');
+    document.querySelectorAll('.theme-toggle').forEach(btn => {
+      if (btn.querySelector('.sun')) btn.querySelector('.sun').style.opacity = isDark ? 0 : 1;
+      if (btn.querySelector('.moon')) btn.querySelector('.moon').style.opacity = isDark ? 1 : 0;
     });
+  }
+  function initThemeToggle() {
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeBtnMobile = document.getElementById('themeToggleBtnMobile');
+    if (themeBtn) themeBtn.onclick = function() {
+      const isDark = !document.body.classList.contains('dark-mode');
+      setTheme(isDark);
+      updateThemeIcon();
+    };
+    if (themeBtnMobile) themeBtnMobile.onclick = function() {
+      const isDark = !document.body.classList.contains('dark-mode');
+      setTheme(isDark);
+      updateThemeIcon();
+    };
+    // Set initial theme
+    const saved = localStorage.getItem('theme');
+    setTheme(saved === 'dark');
+    updateThemeIcon();
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    // ...existing code...
+    initThemeToggle();
+  });
   </script>
 </body>
 </html>
